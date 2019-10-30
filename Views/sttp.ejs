@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ./partials/head.ejs %>
+  <link href="/css/custom.css" rel="stylesheet">
+</head>
+
+<body id="page-top" >
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+    <% include ./partials/navbar %>
+  </nav>
+  <div class="container-fluid p-0" style="width:69%;margin-right:10%;">
+    <section class=" p-lg-4 " id="update">
+      <form method="POST" action="/sttp" enctype="multipart/form-data">
+        <div class="my-auto item" id="documents">
+          
+        </br><h4> Short Term Training Programs </h4>
+        </br>
+        <input id="id" name="id" type="hidden" value="<%- id %>">
+        <label > Date </label></br>
+        <input id="sttpdate" type="text" name="sttpdate" value="<%- sttpdate %>" style="width: 24%;padding:5px;"/></br>
+
+        <label> Sponsorship </label></br>
+        <select id="sttptype" name="sttptype" style="width: 24%;padding:5px;">
+          <option value="College Sponsored" <%= sttptype == 'College Sponsored' ? 'selected' : '' %> > College Sponsored </option>
+          <option value="Self Sponsored" <%= sttptype == 'Self Sponsored' ? 'selected' : '' %> > Self Sponsored </option>
+        </select>
+        </br>
+        
+        <label > Title </label></br>
+        <input id="sttpt" type="text" name="sttpt" value="<%- sttpt %>"/>
+
+        <label > College </label></br>
+        <input id="sttpcol" type="text" name="sttpcol" value="<%- sttpcol %>"/>
+
+        <label > No. of Weeks </label></br>
+        <input id="sttpnw" type="text" name="sttpnw" value="<%- sttpnw %>"/>
+        
+        <label> Upload Certificate </label></br>
+        <div class="fallback">
+        <input name="sttpcerti" type="file" multiple id="sttpcerti" value="" />
+        </div>
+
+    </div>
+      <button class="btn btn--radius-2 btn--red" type="submit"> Upload </button>
+    </div>
+  </form>
+  </section>
+  </div>
+   
+  <% include ./partials/bootjs %>
+  <script>
+    $( function() {
+      $( "#sttpdate" ).datepicker();
+    } );
+    </script>
+  <script src="js/dropzone.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+</body>
+
+</html>
