@@ -4,9 +4,16 @@
 <head>
   <% include ./partials/head.ejs %>
   <!-- Custom styles for this template -->
-
   <link href="/css/custom.css" rel="stylesheet">
-
+<style>
+    th{
+      color: #fff;
+      background:#0062cc;
+    }
+    td{
+      background:aliceblue;
+    }
+</style>
 
 </head>
 
@@ -20,8 +27,8 @@
       <form method="POST" action="/admin/report" id="admin">
         <div class="my-auto item" id="documents">
 
-          <h6><label for="username" style="color:black;font-size:35px;margin-left:36.5%;"> Report Generation</label>
-          </h6>
+          <h4><label for="username" style="color:black;font-size:35px;margin-left:36.5%;"> Report Generation</label>
+          </h4>
 
           <label> Year </label></br>
           <select id="ryear" type="text" name="ryear" style="width: 24%;padding:5px;"></select></br>
@@ -85,8 +92,8 @@
       </form>
     </section>
   </div>
-  <div id="print"  style="margin-left:20%;margin-right:4%;" ></div>
-  <div id="printarea"  style="margin-left:14%;" ></div>
+  <div id="print" style="margin-left:20%;margin-right:4%;"></div>
+  <div id="printarea" style="margin-left:14%;"></div>
 
 
   <!-- Bootstrap core JavaScript -->
@@ -100,7 +107,6 @@
   <script src="/js/resume.js"></script>
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-  <script src="//code.jquery.com/jquery-1.12.4.js"></script>
   <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script>
     var int = document.getElementById("int");
@@ -150,7 +156,7 @@
     function changecat(value) {
       var international = document.getElementById("ri");
       var spon = document.getElementById("rspon");
-      
+
       if (value == "journal" || value == "conference") {
         //international.disabled = false;
         int.style.display = "block";
@@ -183,68 +189,8 @@
 
     create("");
   </script>
+
   <script>
-    function getUserInfo(divContainer, datas)
-    {
-      const request = new XMLHttpRequest();
-      var col = [];
-      var titles = new Array("UserID","Username", "Name", "Department", "Post");
-      request.open('GET', '/user');
-      request.send();
-      var table = document.createElement("table");
-      table.setAttribute("class", "table table-striped table-primary");
-      var tr = table.insertRow(-1); 
-      for (var i = 0; i < titles.length; i++) {
-          var th = document.createElement("th");
-          th.innerHTML = titles[i];
-          tr.appendChild(th);
-      }
-      request.onload = function () {
-        if (request.status === 200) {
-          console.log("Success");
-          data = JSON.parse(request.response);
-      for (key in datas)
-      {
-        if(datas[key]!=null)
-        {
-          for(stuff in datas[key])
-          {
-            var userid = datas[key][stuff]["UserID"];
-            if(!col.includes(userid) )
-            {
-                col.push(userid);
-                for (var i = 0; i < data.length; i++) {
-                  var id = data[i]["data"]["id"];
-                  if(id==userid)
-                  {
-                    tr= table.insertRow(-1);
-                    var tabCell = ""
-                    var uname = data[i]["data"]["Name"];
-                    var name = data[i]["data"]["firstname"] + " " + data[i]["data"]["lastname"];
-                    var dept = data[i]["data"]["dept"];
-                    var title = data[i]["data"]["title"];
-                    tabCell = tr.insertCell(-1);
-                    tabCell.innerHTML = id;
-                    tabCell = tr.insertCell(-1);
-                    tabCell.innerHTML = uname;
-                    tabCell = tr.insertCell(-1);
-                    tabCell.innerHTML = name;
-                    tabCell = tr.insertCell(-1);
-                    tabCell.innerHTML = dept;
-                    tabCell = tr.insertCell(-1);
-                    tabCell.innerHTML = title;
-                  } 
-              
-            
-          }
-            }
-        }
-      }
-        }
-      }
-    }
-    divContainer.appendChild(table);
-    }
     $("#admin").submit(function (event) {
 
       // Stop form from submitting normally
@@ -255,143 +201,177 @@
       console.log("hey");
       // Send the data using post
       var posting = $.post("/admin/report", form.serialize(), function (data) {
-      console.log("Sucess", data);
-   
-      var divContainer = document.getElementById("print");
-      divContainer.innerHTML = "";
-      getUserInfo(divContainer, data);
-      divContainer.appendChild(document.createElement("br"));
-      for(key in data)
-      {
-        if(data[key]!=null)
-        {
-          table = createTable(data[key]);
-          divContainer.appendChild(table);
-          divContainer.appendChild(document.createElement("br"));
-          
+        console.log("Success", data);
+
+        var divContainer = document.getElementById("print");
+        divContainer.innerHTML = "";
+        for (route in data) {
+          if (data[route] != null && data[route].length != 0 && route != "users") {
+            const users = data["users"];
+            table = createTable(route, data[route], users);
+            divContainer.appendChild(table);
+            divContainer.appendChild(document.createElement("br"));
+
+          }
         }
-      }
-      var print = document.getElementById("printarea");
-      print.innerHTML = "<button class=\"btn btn--radius-2 btn--red\" id=\"printbutton\" onclick=\"printdiv()\" style=\"padding: 0px;\"> Download </button>";
+        var print = document.getElementById("printarea");
+        print.innerHTML = "<button class=\"btn btn--radius-2 btn--red\" id=\"printbutton\" onclick=\"printdiv()\" style=\"padding: 0px;\"> Download </button>";
 
       });
     });
 
-    function createTable(data)
-    {
+    function createTable(route, data, users) {
       var col = [];
-      var titlemrg = new Array("Userid","Title","Grant Approved","Year Approved","Category","Authority");
-      var titleprogatt = new Array("Userid","Type","Title"," College"," No of Days","Sponsorship","Date");
-      var titlesemwork = new Array("Userid","Title"," College"," No of Days","Date","Type");
-      var titlefdpsstp = new Array("Userid","Title"," College"," No of Days","Sponsorship","Date");
-      var titlesconjor = new Array("Userid","International/National","Title","Research Title","Author"," ISSN ","Date","DUI");
-      console.log("data is ",data);
+      var titlemrg = new Array("Name", "Department","Category","Title","Authority","Year Approved","Grant Approved","Action");
+      var titleprogatt = new Array("Name", "Department","Date","Type"," Title"," College","Sponsorship","No of Days","Action");
+      var titlesemwork = new Array("Name", "Department","Date"," College"," No of Days","Date","Type","Action");
+      var titlefdpsstp = new Array("Name", "Department","Date"," Title"," College","No of Days","Sponsorship","Action");
+      var titlescon = new Array("Name", "Department","International/National","Main Author","ISSN","Date"," Title ","Research Title","DUI","Action");
+      var titlesjor = new Array("Name", "Department","Date","Title","Research Title","ISSN"," International/National ","Main Author","DUI","Action");
+      var array = {};
+      array["conference"]="Conference";
+      array["journal"]="Journal";
+      array["sttp"] = "Short Term Training Program";
+      array["fdp"] = "Faculty Development Program";
+      array["mrg"] = "Research & Development";
+      array["semwork"] = "Seminar/Workshop";
+      array["progatt"] = "Programs Attended";
+      console.log("data is ", data);
       var table = document.createElement("table");
-      if(data.length > 0)
-      {
-        
-      console.log("key is ", key);
-      for (var i = 0; i < data.length; i++) {
-          for (var keys in data[i]) {
-              if (col.indexOf(keys) === -1) {
-                  col.push(keys);
-              }
-          }
-      }
+      if (data.length > 0) {
 
-      console.log("col is ",col);
+        console.log("route is ", route);
+        for (var i = 0; i < data.length; i++) {
+          for (var keys in data[i]) {
+            if (col.indexOf(keys) === -1) {
+              col.push(keys);
+            }
+          }
+        }
+        table.setAttribute("class", "tblcls table table-striped table-primary");
+        var tr = table.insertRow(-1);
+        if (route == "conference") {
+          for (keys in titlescon) {
+            var th = document.createElement("th");
         
-        table.setAttribute("class", "table table-striped table-primary");
-        var tr = table.insertRow(-1); 
-        if(key=="conference" || key=="journal")
-                    {
-                        for(keys in titlesconjor)
-                        {
-                            
-                            
-                            var th = document.createElement("th");
-                            th.innerHTML = titlesconjor[keys];
-                            tr.appendChild(th);
-                        }
-                
-                    } 
-                    else if(key=="fdp" || key=="sttp")
-                    {
-                        for(keys in titlefdpsstp)
-                        {
-                          
-                            var th = document.createElement("th");
-                            th.innerHTML = titlefdpsstp[keys];
-                            tr.appendChild(th);
-                        }
-                    }
-                    else if(key=="semwork")
-                    {
-                        for(keys in titlesemwork)
-                        {
-                        
-                            var th = document.createElement("th");
-                            th.innerHTML = titlesemwork[keys];
-                            tr.appendChild(th);
-                        }
-                    } 
-                    else if(key=="progatt")
-                    {
-                        for(keys in titleprogatt)
-                        {
-                            
-                            var th = document.createElement("th");
-                            th.innerHTML = titleprogatt[keys];
-                            tr.appendChild(th);
-                        }
-                    }
-                    else
-                    {
-                        for(keys in titlemrg)
-                        {
-                           
-                            var th = document.createElement("th");
-                            th.innerHTML = titlemrg[keys];
-                            tr.appendChild(th);
-                        }
-                    }  
+            if(titlescon[keys] == "Action")
+              {th.classList.add("hideElement");}
+            th.innerHTML = titlescon[keys];
+            tr.appendChild(th);
+          }
+
+        }
+        else if (route == "journal") {
+          for (keys in titlesjor) {
+            var th = document.createElement("th");
+            if(titlesjor[keys] == "Action")
+              {th.classList.add("hideElement");}
+            th.innerHTML = titlesjor[keys];
+            tr.appendChild(th);
+          }
+
+        }
+        else if (route == "fdp" || route == "sttp") {
+          for (keys in titlefdpsstp) {
+            var th = document.createElement("th");
+            if(titlefdpsstp[keys] == "Action")
+              {th.classList.add("hideElement");}
+            th.innerHTML = titlefdpsstp[keys];
+            tr.appendChild(th);
+          }
+        }
+        else if (route == "semwork") {
+          for (keys in titlesemwork) {
+            var th = document.createElement("th");
+            if(titlesemwork[keys] == "Action")
+              {th.classList.add("hideElement");}
+            th.innerHTML = titlesemwork[keys];
+            tr.appendChild(th);
+          }
+        }
+        else if (route == "progatt") {
+          for (keys in titleprogatt) {
+            var th = document.createElement("th");
+            if(titleprogatt[keys] == "Action")
+              {th.classList.add("hideElement");}
+            th.innerHTML = titleprogatt[keys];
+            tr.appendChild(th);
+          }
+        }
+        else if (route == "mrg"){
+          for (keys in titlemrg) {
+            var th = document.createElement("th");
+            if(titlemrg[keys] == "Action")
+              {th.classList.add("hideElement");}
+            th.innerHTML = titlemrg[keys];
+            tr.appendChild(th);
+          }
+        }
+        else{
+          return;
+        }
 
         for (var i = 0; i < data.length; i++) {
-            tr = table.insertRow(-1);
-            var tabCell = ""
-            var id = 0;
-            for (var j = 1; j < col.length; j++) {
-                tabCell = tr.insertCell(-1);
+          tr = table.insertRow(-1);
+          var tabCell = ""
+          var id = data[i][col[1]];
+          var user = users[id].data;
+          tabCell = tr.insertCell(-1);
+          tabCell.innerHTML = user.firstname + " " + user.lastname;
+
+          tabCell = tr.insertCell(-1);
+          tabCell.innerHTML = user.dept;
+
+          for (var j = 2; j < col.length; j++) {
+            tabCell = tr.insertCell(-1);
+            if(data[i][col[j]] == "Inter")
+                tabCell.innerHTML = "International"
+            else if(data[i][col[j]] == "Nat")
+                tabCell.innerHTML = "National"
+            else
                 tabCell.innerHTML = data[i][col[j]];
-            }
-            
+          }
+
+          tabCell = tr.insertCell(-1);
+          tabCell.classList.add("hideElement");
+          const url1 = "/admin/" + route + "/file-viewer/" + data[i]["id"];
+          console.log(url1);
+          tabCell.innerHTML = " <a class=\"btn2 \" href=\"" + url1 + "\"><i class=\"fa fa-download\"></i></a> ";
+
         }
       }
-     
 
-       return table;
+      var header = document.createElement("h4");
+      header.innerHTML = array[route];
+
+      var div = document.createElement("div");
+      div.appendChild(header);
+      div.appendChild(table);
+
+      return div;
     }
-    function printdiv(){
+    function printdiv() {
       var content = document.getElementById("print").innerHTML;
-      var mywindow = window.open('','_blank', 'Print', 'height=600,width=800');
+      var mywindow = window.open('', '_blank', 'Print', 'height=600,width=800');
       mywindow.document.write('<html><head><title>Report</title>');
       mywindow.document.write('<style>' +
-      'header, footer, aside, nav, form, iframe, .menu, .hero, .adslot {display: none !important;}'+
-      'body {margin: 0; color: #000; background-color: #fff;}' +
-      'table {table-layout: fixed; width: 100%; border: 1px solid black; }' +
-      'td { border: 1px solid black; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }' +
-      'th { border: 1px solid black; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }' +
-      '</style>');
-    mywindow.document.write('</head><body ></br></br>');
-    mywindow.document.write(content);
-    mywindow.document.write('</body></html>');
+        '.hideElement {display: none;}'+
+        'header, footer, aside, nav, form, iframe, .menu, .hero, .adslot {display: none !important;}' +
+        'body {margin: 0; color: #000; background-color: #fff;}' +
+        'table {table-layout: fixed; width: 100%; border: 1px solid black; }' +
+        'td { border: 0.5px solid black; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }' +
+        'th { border: 0.5px solid black; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }' +
+        '</style>');
+      mywindow.document.write('</head><body ></br></br>');
+      mywindow.document.write(content);
+      mywindow.document.write('</body></html>');
 
 
-    mywindow.document.close();
-    mywindow.focus()
-    mywindow.print();
-    mywindow.close();
-    return true;
+      mywindow.document.close();
+      mywindow.focus()
+      mywindow.print();
+      mywindow.close();
+      return true;
     }
 
   </script>

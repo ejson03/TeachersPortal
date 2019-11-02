@@ -8,8 +8,11 @@ html, body {
     outline: none;
     font-family: Open Sans;
     font-size: 16px;
-    color: #666;
+    color:black;
     border-radius: 4px;
+    }
+    h4 {
+      font-weight: 600px;
     }
     h1 {
     position: absolute;
@@ -200,6 +203,11 @@ html, body {
         color:red;
         margin-top: 1%;
         background: transparent;
+      }
+      .btn2 {
+        display: inline-block;
+        padding: 0 20px;
+        font-size: 20px;
       }
       .btn--radius-2 {
         -webkit-border-radius: 5px;

@@ -13,7 +13,7 @@
         <% include ./partials/navbaradmin %>
     </nav>
 
-    <div class="container-fluid p-0" style="width:69%;margin-right:20%;">
+    <div class="container " style="margin-left:15%;margin-top:5%;">
       <section class=" p-lg-4 " id="update">
         <form action="/user/add" id="myform">
           <div class="my-auto item" id="personal">
@@ -26,7 +26,7 @@
             <button class="btn btn--radius-2 btn--red"  type="submit"> CREATE </button>
           </div>
         </form>
-        <div id="display" style="color:black;font-size:30px;margin-left:20%;margin-top:15%;">
+        <div id="display" style="color:black;font-size:25px;margin-left:25%;margin-top:15%;">
  </div>
       </section>
     </div>  
@@ -52,7 +52,7 @@
           console.log(data["password"]);
           password = data["password"];
           
-          $( "#display" ).empty().append("The Password Generated Is :"+password);
+          $( "#display" ).empty().append("The Password Generated Is : <mark>"+password+ "</mark>");
         });
         });
     </script>
