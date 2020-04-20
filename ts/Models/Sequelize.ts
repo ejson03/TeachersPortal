@@ -27,7 +27,6 @@ export const SequelizeSql = new Sequelize({
   password: Config.DB.Password,
   port: Config.DB.Port,
   database: Config.DB.DatabaseName,
-  dialect: Config.DB.Dialect,
   logging: true,
   operatorsAliases: operatorsAliases,
   ssl: Config.DB.SSL
@@ -40,7 +39,7 @@ async function CreateDatabaseIfNotExists(db_name: string) {
     password: Config.DB.Password,
     port: Config.DB.Port,
     database: Config.DB.DatabaseName,
-  ssl: true
+    ssl: Config.DB.SSL
     
   });
   const client = await pool.connect();
@@ -64,7 +63,7 @@ async function CreateDatabaseIfNotExists(db_name: string) {
 export async function RunSynchronisation() {
   // First End up Creating the Database
   // In admin Database
-  await CreateDatabaseIfNotExists(Config.DB.DatabaseName);
+  //await CreateDatabaseIfNotExists(Config.DB.DatabaseName);
   // Authenticate if Entered Information is correct
   await SequelizeSql.authenticate();
 

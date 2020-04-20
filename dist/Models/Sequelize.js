@@ -40,7 +40,6 @@ exports.SequelizeSql = new sequelize_typescript_1.Sequelize({
     password: Config.DB.Password,
     port: Config.DB.Port,
     database: Config.DB.DatabaseName,
-    dialect: Config.DB.Dialect,
     logging: true,
     operatorsAliases: operatorsAliases,
     ssl: Config.DB.SSL
@@ -53,7 +52,7 @@ function CreateDatabaseIfNotExists(db_name) {
             password: Config.DB.Password,
             port: Config.DB.Port,
             database: Config.DB.DatabaseName,
-            ssl: true
+            ssl: Config.DB.SSL
         });
         const client = yield pool.connect();
         const query = "SELECT COUNT(*) AS cnt FROM pg_database where datname" +
@@ -75,7 +74,7 @@ function RunSynchronisation() {
     return __awaiter(this, void 0, void 0, function* () {
         // First End up Creating the Database
         // In admin Database
-        yield CreateDatabaseIfNotExists(Config.DB.DatabaseName);
+        //await CreateDatabaseIfNotExists(Config.DB.DatabaseName);
         // Authenticate if Entered Information is correct
         yield exports.SequelizeSql.authenticate();
         exports.SequelizeSql.addModels([Users_Model_1.Users, Conference_Models_1.Conference, Fdp_Models_1.Fdp, Journal_Models_1.Journal, Mrg_Models_1.Mrg, Progatt_Models_1.Progatt, Semwork_Models_1.Semwork, Sttp_Models_1.Sttp]);

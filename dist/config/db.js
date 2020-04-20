@@ -1,13 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DB = {
-    Dialect: "postgres",
-    ProjectName: "dcd9bc0i7p6s1f",
-    DatabaseName: "dcd9bc0i7p6s1f",
-    Host: "ec2-34-233-186-251.compute-1.amazonaws.com",
-    UserName: "tjwojelfwmiuof",
-    Port: 5432,
-    Password: "f390e7f7be0070ea6cc5d30b46f928d523faaf4ab17ea995188d2e420141c2bc",
-    SSL: true
+    Host: String(process.env.DATABASE_HOST || "localhost"),
+    Port: Number(process.env.DATABSE_PORT || 5432),
+    UserName: String(process.env.DATABASE_USER_NAME || "postgres"),
+    Password: String(process.env.DATABASE_PASSWORD || "postgres"),
+    DatabaseName: String(process.env.DATABASE_NAME || "teacherportal"),
+    SSL: Boolean(String(process.env.DATABSE_SSL) === "true" || false)
 };
 //# sourceMappingURL=db.js.map
