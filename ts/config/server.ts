@@ -1,6 +1,6 @@
 import {GetIP} from "./Config.Common";
 
 export const Server = {
-  Port: 8000,
+  Port: 9000,
   Name: GetIP()
 };

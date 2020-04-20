@@ -48,11 +48,13 @@ exports.SequelizeSql = new sequelize_typescript_1.Sequelize({
 function CreateDatabaseIfNotExists(db_name) {
     return __awaiter(this, void 0, void 0, function* () {
         const pool = new pg_1.Pool({
-            host: Config.DB.Host,
-            user: Config.DB.UserName,
-            password: Config.DB.Password,
-            port: Config.DB.Port,
-            database: Config.DB.DatabaseName
+            // host: Config.DB.Host,
+            // user: Config.DB.UserName,
+            // password: Config.DB.Password,
+            // port: Config.DB.Port,
+            // database: Config.DB.DatabaseName
+            connectionString: process.env.DATABASE_URL,
+            ssl: true
         });
         const client = yield pool.connect();
         const query = "SELECT COUNT(*) AS cnt FROM pg_database where datname" +
