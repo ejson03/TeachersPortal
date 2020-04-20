@@ -6,3 +6,5 @@ export const DB = {
   DatabaseName: String(process.env.DATABASE_NAME || "teacherportal"),
   SSL: Boolean(String(process.env.DATABSE_SSL) === "true" || false)
 };
+
+console.log(DB);
