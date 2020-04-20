@@ -5,7 +5,7 @@
   "scripts": {
     "build": "rimraf ./dist && tsc",
     "start": "nodemon ./dist/server.js",
-    "deploy": "git push heroku master",
+    "deploy": "git add -A && git commit -m \"heroku production setup altered\" && git push heroku master",
     "test": "echo \"Error: no test specified\" && exit 1",
     "logs": "heroku logs --tail",
     "database": "heroku addons:create heroku-postgresql:hobby-dev"

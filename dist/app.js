@@ -17,6 +17,7 @@ const Routes = __importStar(require("./routes/Routes"));
 const cors = __importStar(require("cors"));
 const Passport_Models_1 = require("./Models/Passport.Models");
 exports.app = express_1.default();
+require('dotenv').config();
 // app.use(bodyParser.json());
 // middleware for parsing application/x-www-form-urlencoded
 exports.app.use(bodyParser.urlencoded({ extended: true }));
