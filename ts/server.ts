@@ -1,7 +1,7 @@
 import * as config from './config/server'
 import {app} from "./app";
 
-app.listen(config.Server.Port, config.Server.Name, () => {
+app.listen('https://teachers-portal.herokuapp.com', () => {
   console.log("Default Login Screen", config.Server.Name + ':' + config.Server.Port);
 });
 

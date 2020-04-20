@@ -9,7 +9,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const config = __importStar(require("./config/server"));
 const app_1 = require("./app");
-app_1.app.listen(config.Server.Port, config.Server.Name, () => {
+app_1.app.listen('https://teachers-portal.herokuapp.com', () => {
     console.log("Default Login Screen", config.Server.Name + ':' + config.Server.Port);
 });
 process.on("SIGINT", function () {
