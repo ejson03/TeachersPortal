@@ -28,19 +28,18 @@ export const SequelizeSql = new Sequelize({
   port: Config.DB.Port,
   database: Config.DB.DatabaseName,
   dialect: Config.DB.Dialect,
-  // Set logging to False to disable logging
   logging: true,
-  operatorsAliases: operatorsAliases
+  operatorsAliases: operatorsAliases,
+  ssl: Config.DB.SSL
 });
 
 async function CreateDatabaseIfNotExists(db_name: string) {
   const pool = new Pool({
-    // host: Config.DB.Host,
-    // user: Config.DB.UserName,
-    // password: Config.DB.Password,
-    // port: Config.DB.Port,
-    // database: Config.DB.DatabaseName
-    connectionString: "postgres://tjwojelfwmiuof:f390e7f7be0070ea6cc5d30b46f928d523faaf4ab17ea995188d2e420141c2bc@ec2-34-233-186-251.compute-1.amazonaws.com:5432/dcd9bc0i7p6s1f",
+    host: Config.DB.Host,
+    user: Config.DB.UserName,
+    password: Config.DB.Password,
+    port: Config.DB.Port,
+    database: Config.DB.DatabaseName,
   ssl: true
     
   });
@@ -65,7 +64,7 @@ async function CreateDatabaseIfNotExists(db_name: string) {
 export async function RunSynchronisation() {
   // First End up Creating the Database
   // In admin Database
-  await CreateDatabaseIfNotExists(Config.DB.ProjectName);
+  await CreateDatabaseIfNotExists(Config.DB.DatabaseName);
   // Authenticate if Entered Information is correct
   await SequelizeSql.authenticate();
 
