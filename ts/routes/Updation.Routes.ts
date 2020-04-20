@@ -183,5 +183,6 @@ Updation.get("/", (req, res) => {
         if (req.user.Authority === "NORMAL")
             return res.redirect("/index");
     }
+    console.log("###################################");
     return res.render("login.html");
 });
