@@ -1,0 +1,23 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var Users_Routes_1 = require("./Users.Routes");
+exports.Users = Users_Routes_1.Users;
+var Admin_Routes_1 = require("./Admin.Routes");
+exports.Admin = Admin_Routes_1.Admin;
+var Updation_Routes_1 = require("./Updation.Routes");
+exports.Updation = Updation_Routes_1.Updation;
+var Conference_Routes_1 = require("./Conference.Routes");
+exports.Conference = Conference_Routes_1.Conference;
+var Journal_Routes_1 = require("./Journal.Routes");
+exports.Journal = Journal_Routes_1.Journal;
+var Fdp_Routes_1 = require("./Fdp.Routes");
+exports.Fdp = Fdp_Routes_1.Fdp;
+var Sttp_Routes_1 = require("./Sttp.Routes");
+exports.Sttp = Sttp_Routes_1.Sttp;
+var Mrg_Routes_1 = require("./Mrg.Routes");
+exports.Mrg = Mrg_Routes_1.Mrg;
+var Progatt_Routes_1 = require("./Progatt.Routes");
+exports.Progatt = Progatt_Routes_1.Progatt;
+var Semwork_Routes_1 = require("./Semwork.Routes");
+exports.Semwork = Semwork_Routes_1.Semwork;
+//# sourceMappingURL=Routes.js.map
