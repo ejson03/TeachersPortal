@@ -8,5 +8,6 @@ exports.DB = {
     UserName: "imbjvirpczaeqz",
     Port: 5432,
     Password: "54c2ab61ed83dd1b1c382acf8a1ee28e624eb8f383c7c3539ec0889c5da3f7bb",
+    SSL: true
 };
 //# sourceMappingURL=db.js.map

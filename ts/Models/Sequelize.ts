@@ -35,11 +35,14 @@ export const SequelizeSql = new Sequelize({
 
 async function CreateDatabaseIfNotExists(db_name: string) {
   const pool = new Pool({
-    host: Config.DB.Host,
-    user: Config.DB.UserName,
-    password: Config.DB.Password,
-    port: Config.DB.Port,
-    database: Config.DB.DatabaseName
+    // host: Config.DB.Host,
+    // user: Config.DB.UserName,
+    // password: Config.DB.Password,
+    // port: Config.DB.Port,
+    // database: Config.DB.DatabaseName
+    connectionString: "postgres://imbjvirpczaeqz:54c2ab61ed83dd1b1c382acf8a1ee28e624eb8f383c7c3539ec0889c5da3f7bb@ec2-52-200-119-0.compute-1.amazonaws.com:5432/d7ra2glp760kah",
+  ssl: true
+    
   });
   const client = await pool.connect();
 
