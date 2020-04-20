@@ -5,7 +5,7 @@
   "scripts": {
     "build": "tsc",
     "start": "nodemon ./dist/server.js",
-    "deploy": "node ./dist/server.js",
+    "deploy": "git push heroku master",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

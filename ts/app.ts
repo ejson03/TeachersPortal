@@ -29,9 +29,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // middleware for json body parsing
 app.use(bodyParser.json({ limit: "20mb" }));
 
-// app.get('/', function(req, res) {
-//     res.render('login.html');
-// });
 
 // Route via this as Path to Users
 app.use("/user", Routes.Users);
