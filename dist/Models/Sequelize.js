@@ -39,7 +39,7 @@ exports.SequelizeSql = new sequelize_typescript_1.Sequelize({
     username: Config.DB.UserName,
     password: Config.DB.Password,
     port: Config.DB.Port,
-    database: Config.DB.ProjectName,
+    database: "d7ra2glp760kah",
     dialect: Config.DB.Dialect,
     // Set logging to False to disable logging
     logging: true,
@@ -64,10 +64,10 @@ function CreateDatabaseIfNotExists(db_name) {
             " AND datistemplate = false;";
         const res = yield client.query(query);
         const rowCount = Number(res.rows[0].cnt);
-        if (rowCount === 0) {
-            // Create the Database Now
-            yield client.query("CREATE DATABASE " + db_name);
-        }
+        // if (rowCount === 0) {
+        //   // Create the Database Now
+        //   await client.query("CREATE DATABASE " + db_name);
+        // }
         client.release();
         yield pool.end();
     });
