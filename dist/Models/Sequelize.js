@@ -53,7 +53,7 @@ function CreateDatabaseIfNotExists(db_name) {
             // password: Config.DB.Password,
             // port: Config.DB.Port,
             // database: Config.DB.DatabaseName
-            connectionString: "postgres://imbjvirpczaeqz:54c2ab61ed83dd1b1c382acf8a1ee28e624eb8f383c7c3539ec0889c5da3f7bb@ec2-52-200-119-0.compute-1.amazonaws.com:5432/d7ra2glp760kah",
+            connectionString: "postgres://tjwojelfwmiuof:f390e7f7be0070ea6cc5d30b46f928d523faaf4ab17ea995188d2e420141c2bc@ec2-34-233-186-251.compute-1.amazonaws.com:5432/dcd9bc0i7p6s1f",
             ssl: true
         });
         const client = yield pool.connect();

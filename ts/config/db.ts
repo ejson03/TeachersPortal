@@ -1,11 +1,11 @@
 export const DB = {
   Dialect: "postgres",
-  ProjectName: "teacherportal",
-  DatabaseName: "d7ra2glp760kah",
-  Host: "ec2-52-200-119-0.compute-1.amazonaws.com",
-  UserName: "imbjvirpczaeqz",
+  ProjectName: "dcd9bc0i7p6s1f",
+  DatabaseName: "dcd9bc0i7p6s1f",
+  Host: "ec2-34-233-186-251.compute-1.amazonaws.com",
+  UserName: "tjwojelfwmiuof",
   Port: 5432,
-  Password: "54c2ab61ed83dd1b1c382acf8a1ee28e624eb8f383c7c3539ec0889c5da3f7bb",
+  Password: "f390e7f7be0070ea6cc5d30b46f928d523faaf4ab17ea995188d2e420141c2bc",
   SSL: true
 };
 
