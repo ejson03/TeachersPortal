@@ -6,6 +6,8 @@ import * as cors from "cors";
 import { PassportModelsGenerate } from "./Models/Passport.Models";
 
 export const app = express();
+require('dotenv').config()
+
 // app.use(bodyParser.json());
 // middleware for parsing application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
