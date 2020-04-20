@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Teacher's Portal Application",
   "scripts": {
-    "build": "tsc",
+    "build": "rimraf ./dist && tsc",
     "start": "nodemon ./dist/server.js",
     "deploy": "git push heroku master",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -53,6 +53,7 @@
     "@types/jsonwebtoken": "^8.3.5",
     "@types/node": "^11.15.0",
     "@types/sequelize": "^4.28.6",
+    "rimraf": "^3.0.2",
     "typescript": "^3.6.4"
   },
   "engines": {

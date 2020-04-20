@@ -9,4 +9,5 @@ exports.DB = {
     SSL: Boolean(String(process.env.DATABSE_SSL) === "true" || false)
 };
 console.log(exports.DB);
+console.log("####################################");
 //# sourceMappingURL=db.js.map
