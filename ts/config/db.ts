@@ -6,7 +6,7 @@ export const DB = {
   UserName: String(process.env.DATABASE_USER_NAME || "postgres"),
   Password: String(process.env.DATABASE_PASSWORD || "postgres"),
   DatabaseName: String(process.env.DATABASE_NAME || "teacherportal"),
-  SSL: Boolean(process.env.DATABASE_SSL || false)
+  SSL: Boolean(String(process.env.SSL) === "true" || false)
 };
 
 console.log(DB);
