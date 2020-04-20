@@ -26,7 +26,7 @@ export const SequelizeSql = new Sequelize({
   username: Config.DB.UserName,
   password: Config.DB.Password,
   port: Config.DB.Port,
-  database: "d7ra2glp760kah",
+  database: Config.DB.DatabaseName,
   dialect: Config.DB.Dialect,
   // Set logging to False to disable logging
   logging: true,
