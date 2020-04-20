@@ -35,6 +35,7 @@ const operatorsAliases = {
 };
 // Create the Connection
 exports.SequelizeSql = new sequelize_typescript_1.Sequelize({
+    dialect: "postgres",
     host: Config.DB.Host,
     username: Config.DB.UserName,
     password: Config.DB.Password,

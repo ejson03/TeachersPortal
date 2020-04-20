@@ -22,6 +22,7 @@ const operatorsAliases = {
 
 // Create the Connection
 export const SequelizeSql = new Sequelize({
+  dialect: "postgres",
   host: Config.DB.Host,
   username: Config.DB.UserName,
   password: Config.DB.Password,
